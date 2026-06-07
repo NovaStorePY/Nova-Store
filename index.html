@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NOVA Store — Recargas digitales rápidas y seguras. Robux, Diamantes, V-Bucks, Gift Cards, Streaming y más.">
+  <meta name="theme-color" content="#7C3AED">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="NOVA Store | Recargas Digitales">
+  <meta property="og:description" content="Recargas rápidas y seguras. Robux, Free Fire, Fortnite, Netflix y más.">
+  <meta property="og:type" content="website">
+
+  <title>NOVA Store | Recargas Digitales</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="img/logo.png">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  CART OVERLAY + SIDEBAR                             ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<div class="cart-overlay" id="cartOverlay"></div>
+
+<aside class="cart-sidebar" id="cartSidebar" aria-label="Carrito de compras">
+  <div class="cart-header">
+    <h2 class="cart-title"><i class="fas fa-shopping-cart" style="color:var(--purple-light);margin-right:10px"></i>Mi Carrito</h2>
+    <button class="cart-close" onclick="closeCart()" aria-label="Cerrar carrito">
+      <i class="fas fa-times"></i>
+    </button>
+  </div>
+
+  <div class="cart-items" id="cartItems">
+    <!-- Items rendered by JS -->
+  </div>
+
+  <div class="cart-footer">
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="cartSubtotal">Gs 0</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span id="cartTotal">Gs 0</span>
+      </div>
+    </div>
+    <div class="cart-footer-actions">
+      <button class="btn btn-whatsapp" style="justify-content:center;font-size:0.95rem" onclick="sendWhatsAppOrder()">
+        <i class="fab fa-whatsapp"></i> Enviar Pedido por WhatsApp
+      </button>
+      <button class="btn-clear" onclick="clearCart()">
+        <i class="fas fa-trash" style="margin-right:6px"></i>Vaciar carrito
+      </button>
+    </div>
+  </div>
+</aside>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  MOBILE NAV DRAWER                                  ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<nav class="nav-drawer" id="navDrawer" aria-label="Menú móvil">
+  <a href="#catalogo"><i class="fas fa-th-large" style="margin-right:10px;color:var(--purple-light)"></i>Catálogo</a>
+  <a href="#pagos"><i class="fas fa-credit-card" style="margin-right:10px;color:var(--purple-light)"></i>Pagos</a>
+  <a href="#ventajas"><i class="fas fa-star" style="margin-right:10px;color:var(--purple-light)"></i>Ventajas</a>
+  <a href="#testimonios"><i class="fas fa-comment-alt" style="margin-right:10px;color:var(--purple-light)"></i>Opiniones</a>
+  <a href="#faq"><i class="fas fa-question-circle" style="margin-right:10px;color:var(--purple-light)"></i>FAQ</a>
+  <a href="https://wa.me/595984955895" target="_blank" style="margin-top:16px;background:linear-gradient(135deg,#25D366,#128C7E);color:#fff;text-align:center">
+    <i class="fab fa-whatsapp" style="margin-right:8px"></i>WhatsApp
+  </a>
+</nav>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  HEADER                                             ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<header id="header" role="banner">
+  <div class="container header-inner">
+
+    <!-- Logo -->
+    <a href="#" class="logo" aria-label="NOVA Store - Inicio">
+      <img src="img/logo.png" alt="NOVA Store logo" class="logo-img"
+           onerror="this.style.display='none'">
+      <span class="logo-text">NOVA Store</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a href="#catalogo">Catálogo</a>
+      <a href="#pagos">Pagos</a>
+      <a href="#ventajas">Ventajas</a>
+      <a href="#testimonios">Opiniones</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <button class="cart-btn" onclick="openCart()" aria-label="Abrir carrito">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-badge" id="cartBadge">0</span>
+      </button>
+
+      <a href="https://wa.me/595984955895" target="_blank" rel="noopener" class="btn btn-whatsapp">
+        <i class="fab fa-whatsapp"></i>
+        <span>WhatsApp</span>
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  HERO                                               ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="hero" aria-label="Inicio">
+  <div class="hero-bg"></div>
+  <div class="container hero-inner">
+
+    <!-- Text side -->
+    <div class="hero-content">
+      <div class="hero-eyebrow">
+        <span></span>
+        Tienda Digital Confiable
+      </div>
+
+      <h1 class="hero-title">
+        Recargas Digitales<br>
+        <span class="gradient-text">Rápidas y Seguras</span>
+      </h1>
+
+      <p class="hero-subtitle">
+        Robux, Diamantes, V-Bucks, Gift Cards, Streaming y mucho más.
+        Entrega inmediata · Atención personalizada · Pago local.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#catalogo" class="btn btn-primary">
+          <i class="fas fa-th-large"></i> Ver Catálogo
+        </a>
+        <a href="https://wa.me/595984955895" target="_blank" rel="noopener" class="btn btn-whatsapp">
+          <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">500+</div>
+          <div class="stat-label">Clientes</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">40+</div>
+          <div class="stat-label">Productos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">Disponible</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual side -->
+    <div class="hero-visual">
+      <div class="hero-orb">
+        <img src="img/logo.png" alt="NOVA Store" class="hero-logo-big"
+             onerror="this.outerHTML='<div style=\'width:160px;height:160px;border-radius:30px;background:linear-gradient(135deg,#7C3AED,#A855F7);display:flex;align-items:center;justify-content:center;font-family:Exo 2,sans-serif;font-weight:900;font-size:2.5rem;color:#fff\'>N</div>'">
+      </div>
+      <div class="hero-chips">
+        <div class="chip"><i class="fas fa-bolt" style="color:#F59E0B;margin-right:5px"></i>Entrega Inmediata</div>
+        <div class="chip"><i class="fas fa-shield-alt" style="color:#10B981;margin-right:5px"></i>100% Seguro</div>
+        <div class="chip"><i class="fab fa-whatsapp" style="color:#25D366;margin-right:5px"></i>Soporte 24/7</div>
+        <div class="chip"><i class="fas fa-tags" style="color:var(--purple-light);margin-right:5px"></i>Mejor Precio</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  CATÁLOGO                                           ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="catalogo" aria-label="Catálogo de productos">
+  <div class="container">
+    <h2 class="section-title reveal">Catálogo de Recargas</h2>
+    <p class="section-sub reveal">Encontrá todo lo que necesitás para tus juegos y plataformas favoritas</p>
+
+    <!-- Controls -->
+    <div class="catalog-controls reveal">
+      <div class="search-wrap">
+        <i class="fas fa-search"></i>
+        <input
+          type="search"
+          id="searchInput"
+          class="search-input"
+          placeholder="Buscar producto, juego..."
+          autocomplete="off"
+          aria-label="Buscar productos"
+        >
+      </div>
+
+      <select id="sortSelect" class="catalog-select" aria-label="Ordenar por precio">
+        <option value="default">Ordenar por...</option>
+        <option value="asc">Precio: Menor a Mayor</option>
+        <option value="desc">Precio: Mayor a Menor</option>
+      </select>
+    </div>
+
+    <!-- Category tabs -->
+    <div class="cat-tabs reveal" id="catTabs" role="tablist" aria-label="Filtrar por categoría">
+      <!-- Rendered by JS -->
+    </div>
+
+    <!-- Products grid -->
+    <div class="products-grid" id="productsGrid">
+      <!-- Rendered by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  PAYMENT METHODS                                    ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="pagos" aria-label="Métodos de pago">
+  <div class="container">
+    <h2 class="section-title reveal">Métodos de Pago</h2>
+    <p class="section-sub reveal">Pagá de forma segura con los medios más usados en Paraguay</p>
+
+    <div class="payment-grid">
+
+      <div class="payment-card reveal">
+        <div class="payment-icon">🏦</div>
+        <div class="payment-info">
+          <h3>Transferencia Bancaria</h3>
+          <p>Transferí desde cualquier banco local. Rápido y sin comisiones adicionales.</p>
+        </div>
+      </div>
+
+      <div class="payment-card reveal">
+        <div class="payment-icon" style="background:rgba(255,0,80,0.12);border-color:rgba(255,0,80,0.2)">
+          <span style="font-size:1.4rem;font-weight:900;color:#FF0050">T</span>
+        </div>
+        <div class="payment-info">
+          <h3>Tigo Money</h3>
+          <p>Enviá tu giro por Tigo Money. Proceso inmediato y confirmación al instante.</p>
+        </div>
+      </div>
+
+      <div class="payment-card reveal">
+        <div class="payment-icon" style="background:rgba(37,211,102,0.12);border-color:rgba(37,211,102,0.2)">
+          <i class="fab fa-whatsapp" style="color:#25D366;font-size:1.6rem"></i>
+        </div>
+        <div class="payment-info">
+          <h3>Coordinación por WhatsApp</h3>
+          <p>Consultá cualquier método de pago directamente con nosotros por WhatsApp.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  VENTAJAS / FEATURES                                ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="ventajas" aria-label="Nuestras ventajas">
+  <div class="container">
+    <h2 class="section-title reveal">¿Por qué elegirnos?</h2>
+    <p class="section-sub reveal">Comprometidos con darte la mejor experiencia de compra</p>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-bolt" style="color:#F59E0B"></i></div>
+        <h3>Entrega Rápida</h3>
+        <p>Recibís tu recarga en minutos, sin demoras ni complicaciones.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-user-headset" style="color:#60A5FA"></i></div>
+        <h3>Atención Personalizada</h3>
+        <p>Te acompañamos en cada paso. Soporte real por WhatsApp.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-shield-alt" style="color:#10B981"></i></div>
+        <h3>Compra Segura</h3>
+        <p>Transacciones 100% seguras. Tu información está protegida.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fab fa-whatsapp" style="color:#25D366"></i></div>
+        <h3>Soporte por WhatsApp</h3>
+        <p>Respondemos rápido. Siempre hay alguien para ayudarte.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-map-marker-alt" style="color:#F87171"></i></div>
+        <h3>Pagos Locales</h3>
+        <p>Tigo Money y transferencias bancarias locales. Sin dólares.</p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-icon"><i class="fas fa-clock" style="color:#A78BFA"></i></div>
+        <h3>Disponibilidad Diaria</h3>
+        <p>Atendemos todos los días. Recargas disponibles siempre.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  TESTIMONIALS                                       ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="testimonios" aria-label="Testimonios de clientes">
+  <div class="container">
+    <h2 class="section-title reveal">Lo que dicen nuestros clientes</h2>
+    <p class="section-sub reveal">Cientos de jugadores ya confían en NOVA Store</p>
+
+    <div class="testimonials-grid">
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Compré Robux y llegaron en menos de 5 minutos. Súper rápido y el precio es el mejor que encontré. Ya son mis vendedores de confianza."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">MA</div>
+          <div>
+            <div class="author-name">Matías A.</div>
+            <div class="author-game"><i class="fas fa-gamepad" style="margin-right:4px"></i>Roblox Player</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Recargué diamantes para Free Fire y fue instantáneo. Además me respondieron super rápido por WhatsApp cuando tuve una duda. 100% recomendado."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SL</div>
+          <div>
+            <div class="author-name">Sofía L.</div>
+            <div class="author-game"><i class="fas fa-gamepad" style="margin-right:4px"></i>Free Fire</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Compré el Game Pass Ultimate y lo recibí al toque. El proceso fue fácil y el precio es mucho más accesible que en la tienda oficial. NOVA Store es lo mejor."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">DR</div>
+          <div>
+            <div class="author-name">Diego R.</div>
+            <div class="author-game"><i class="fas fa-gamepad" style="margin-right:4px"></i>Xbox Gamer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Llevo meses comprando Netflix y Spotify acá. Nunca tuve problemas. El precio es excelente y siempre está disponible. Lo recomiendo a todos mis amigos."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">VG</div>
+          <div>
+            <div class="author-name">Valentina G.</div>
+            <div class="author-game"><i class="fas fa-tv" style="margin-right:4px"></i>Streaming Fan</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Compré V-Bucks para Fortnite. Me llegaron en minutos. La atención fue excelente y el proceso súper simple. Sin duda vuelvo a comprar acá."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">JC</div>
+          <div>
+            <div class="author-name">Joaquín C.</div>
+            <div class="author-game"><i class="fas fa-gamepad" style="margin-right:4px"></i>Fortnite Player</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Gemas para Brawl Stars al mejor precio. La entrega fue rápida y el vendedor muy amable. Ya recomendé NOVA Store a todo mi equipo de Brawl."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">NP</div>
+          <div>
+            <div class="author-name">Nicolás P.</div>
+            <div class="author-game"><i class="fas fa-gamepad" style="margin-right:4px"></i>Brawl Stars</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  FAQ                                                ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section id="faq" aria-label="Preguntas frecuentes">
+  <div class="container">
+    <h2 class="section-title reveal">Preguntas Frecuentes</h2>
+    <p class="section-sub reveal">Respondemos tus dudas más comunes</p>
+
+    <div class="faq-list" role="list">
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Cómo recibo mi recarga?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Una vez confirmado el pago, te enviamos la recarga directamente a tu cuenta del juego o plataforma. En la mayoría de los casos el proceso es automático. También podés seguir el estado de tu pedido por WhatsApp.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Cuánto tarda la entrega?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>La mayoría de las recargas se entregan en menos de 5 minutos después de confirmado el pago. En casos excepcionales puede demorar hasta 30 minutos. Te notificamos por WhatsApp en cada paso.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Qué métodos de pago aceptan?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Aceptamos transferencias bancarias a los principales bancos del país y giros por Tigo Money. Si tenés dudas sobre el método de pago, podés consultarnos directamente por WhatsApp antes de realizar tu compra.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Es seguro comprar en NOVA Store?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Totalmente. Contamos con cientos de clientes satisfechos y operamos con total transparencia. Tus datos son confidenciales y jamás los compartimos con terceros. En caso de cualquier problema, te asistimos hasta resolverlo.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Qué pasa si no recibo mi recarga?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>Si por algún motivo no recibís tu recarga dentro del tiempo estimado, contactanos de inmediato por WhatsApp. Revisamos tu pedido y lo resolvemos a la brevedad. Garantizamos la entrega o te devolvemos el dinero.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal" role="listitem">
+        <button class="faq-question" aria-expanded="false">
+          <span>¿Tienen descuentos por compras frecuentes?</span>
+          <span class="faq-icon"><i class="fas fa-chevron-down"></i></span>
+        </button>
+        <div class="faq-answer" role="region">
+          <p>¡Sí! Tenemos beneficios especiales para clientes frecuentes. Consultanos por WhatsApp para conocer las promociones actuales y los descuentos disponibles para vos.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  CTA BANNER                                         ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<section style="padding:70px 0" aria-label="Llamada a la acción">
+  <div class="container">
+    <div class="glass reveal" style="padding:52px 40px;text-align:center;background:linear-gradient(135deg,rgba(124,58,237,0.15),rgba(168,85,247,0.08));border-color:rgba(168,85,247,0.3);box-shadow:0 0 60px rgba(124,58,237,0.15)">
+      <h2 style="font-family:var(--font-head);font-weight:900;font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:14px">
+        ¿Listo para recargar?
+      </h2>
+      <p style="color:var(--text-muted);margin-bottom:30px;font-size:1.05rem;max-width:480px;margin-left:auto;margin-right:auto;line-height:1.65">
+        Contactanos ahora por WhatsApp y recibí tu recarga en minutos. Atención personalizada garantizada.
+      </p>
+      <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
+        <a href="https://wa.me/595984955895" target="_blank" rel="noopener" class="btn btn-whatsapp" style="font-size:1rem;padding:15px 34px">
+          <i class="fab fa-whatsapp"></i> Contactar por WhatsApp
+        </a>
+        <a href="#catalogo" class="btn btn-outline" style="font-size:1rem;padding:15px 34px">
+          <i class="fas fa-th-large"></i> Ver Catálogo
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════════════════════════════╗ -->
+<!-- ║  FOOTER                                             ║ -->
+<!-- ╚══════════════════════════════════════════════════════╝ -->
+<footer id="footer" role="contentinfo">
+  <div class="container">
+
+    <div class="footer-grid">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <a href="#" class="logo">
+          <img src="img/logo.png" alt="NOVA Store" class="logo-img"
+               onerror="this.style.display='none'">
+          <span class="logo-text">NOVA Store</span>
+        </a>
+        <p>Tu tienda de recargas digitales confiable en Paraguay. Entrega inmediata, precios accesibles y atención personalizada.</p>
+        <div class="social-links">
+          <a href="https://wa.me/595984955895" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link" aria-label="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Links -->
+      <div class="footer-col">
+        <h4>Productos</h4>
+        <ul>
+          <li><a href="#catalogo">Roblox</a></li>
+          <li><a href="#catalogo">Free Fire</a></li>
+          <li><a href="#catalogo">Fortnite</a></li>
+          <li><a href="#catalogo">Brawl Stars</a></li>
+          <li><a href="#catalogo">PlayStation</a></li>
+          <li><a href="#catalogo">Streaming</a></li>
+        </ul>
+      </div>
+
+      <!-- Info -->
+      <div class="footer-col">
+        <h4>Información</h4>
+        <ul>
+          <li><a href="#ventajas">¿Por qué elegirnos?</a></li>
+          <li><a href="#pagos">Métodos de pago</a></li>
+          <li><a href="#testimonios">Testimonios</a></li>
+          <li><a href="#faq">Preguntas frecuentes</a></li>
+          <li><a href="https://wa.me/595984955895" target="_blank">Contacto</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 NOVA Store. Todos los derechos reservados.</p>
+      <div class="footer-payments">
+        <span class="pay-badge">🏦 Transferencia</span>
+        <span class="pay-badge" style="color:#FF0050">T Tigo Money</span>
+        <span class="pay-badge"><i class="fab fa-whatsapp" style="color:#25D366"></i> WhatsApp</span>
+      </div>
+    </div>
+
+  </div>
+</footer>
+
+<!-- ── Toast notification ──────────────────────────────── -->
+<div class="toast" id="toast" role="alert" aria-live="polite">
+  <i class="fas fa-check-circle"></i>
+  <span></span>
+</div>
+
+<!-- ── Scroll to top ──────────────────────────────────── -->
+<button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- Scripts -->
+<script src="js/script.js"></script>
+
+</body>
+</html>
