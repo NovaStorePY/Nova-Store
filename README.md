@@ -1,2 +1,0 @@
-# Nova-Store
-Nova Store
